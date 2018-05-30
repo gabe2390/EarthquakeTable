@@ -3,18 +3,24 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppComponent } from './app.component';
+import { GuruAppComponent } from './app.component';
+import { FilterDisplayDataComponent } from 'components/filter-display-data/filter-display-data.component';
+import { EarthquakeDisplayComponent } from '../components/earthquake-display/earthquake-display.component';
+import { EarthquakeFilterService } from '../services/earthquake-filter.service';
+import { EarthquakeDataService } from './../services/earthquake-data.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    GuruAppComponent,
+    EarthquakeDisplayComponent,
+    FilterDisplayDataComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [EarthquakeDataService, EarthquakeFilterService],
+  bootstrap: [GuruAppComponent]
 })
-export class AppModule { }
+export class GuruAppModule { }

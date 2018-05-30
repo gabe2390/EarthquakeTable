@@ -1,0 +1,46 @@
+.earthquake-table-container {
+  width: 100%;
+}
+
+.earthquake-table {
+  width: 100%;
+  padding: 2px;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.earthquake-table-row {
+  text-align: left;
+  height: 40px;
+  font-size: 12pt;
+}
+
+tr:nth-child(even) {
+  background-color: #eaf1ff;
+}
+
+.header {
+  font-weight: bold;
+  font-size: 15pt;
+}
+.header:last-of-type{
+  width:300px;
+}
+.cell {
+  padding: 0 10px;
+}
+
+.details-button {
+  height: 100%;
+  width: 100%;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+}
+
+.details-conatiner {
+}
+
+.details {
+  font-size: 12pt;
+}

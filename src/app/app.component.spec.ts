@@ -1,34 +1,53 @@
+import { IEarthquakeData } from './../models/earthquake-data.model';
+import { EarthquakeDataService } from './../services/earthquake-data.service';
 /* tslint:disable:no-unused-variable */
 
-import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { GuruAppComponent } from './app.component';
 
-describe('AppComponent', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
+let fixture: ComponentFixture<GuruAppComponent>;
+let app: GuruAppComponent;
+let earthquakeDataServiceMock: EarthquakeDataService;
+let earthquakes: IEarthquakeData[];
+
+describe('GuruAppComponent', () => {
+  describe('OnInit', () => {
+
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          GuruAppComponent
+        ],
+      });
+      TestBed.compileComponents();
+      fixture = TestBed.createComponent(GuruAppComponent);
+      app = fixture.debugElement.componentInstance;
+
+      earthquakeDataServiceMock = jasmine.createSpyObj('EarthquakeDataService', ['getEarthquakeData']);
+      earthquakeDataServiceMock.getEarthquakeData = jasmine.createSpy('getEarthquakeData').and.returnValue(earthquakes);
     });
-    TestBed.compileComponents();
+
+    it('should create the app', async(() => {
+      expect(app).toBeTruthy();
+    }));
+
+    it(`should set status to loading'`, async(() => {
+      expect(app.restCallStatus).toEqual('Loading');
+    }));
+
+    it(`should call earthquake data service to retrieve data'`, async(() => {
+      expect(earthquakeDataServiceMock.getEarthquakeData).toHaveBeenCalled();
+    }));
+
+    it(`should set earthquake data  and restCallStatus upon resolution of the promise`, async(() => {
+      expect(app.earthquakeData).toBe(earthquakes);
+      expect(app.restCallStatus).toBe('Loading');
+    }));
+
+    it(`should set earthquake data  and restCallStatus upon rejcetion of the promise`, async(() => {
+      expect(app.earthquakeData).toBe([]);
+      expect(app.restCallStatus).toBe('Error');
+    }));
+
   });
-
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
-
-  it(`should have as title 'app works!'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app works!');
-  }));
-
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('app works!');
-  }));
 });
