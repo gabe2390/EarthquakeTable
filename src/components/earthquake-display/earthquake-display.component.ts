@@ -19,7 +19,7 @@ import { EarthquakeFilterService } from 'services/earthquake-filter.service';
         </tr>
         <tr *ngFor="let earthquake of filteredEarthquakes" class="earthquake-table-row">
           <td class="cell">{{earthquake.earthquake.id}}</td>
-          <td class="cell">{{earthquake.earthquake.time}}</td>
+          <td class="cell">{{earthquake.earthquake.time | date:'fullDate'}}</td>
           <td class="cell">{{earthquake.earthquake.place}}</td>
           <td class="cell" >{{earthquake.earthquake.mag}}</td>
           <td class="cell details">
